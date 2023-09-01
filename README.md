@@ -1,6 +1,6 @@
 # crescoo
 
-application for finding job
+Application that connects people with limited skills find daily wage jobs and easily locate stores needed for house building projects
 
 ## Getting Started
 
