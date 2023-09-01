@@ -1,4 +1,4 @@
-# crescoo
+# Crescoo
 
 Application that connects people with limited skills find daily wage jobs and easily locate stores needed for house building projects
 
