@@ -12,13 +12,13 @@ class Top_part extends StatelessWidget {
             left: .415*MediaQuery.of(context).size.width,
             top: .125 * MediaQuery.of(context).size.height,
             child: SizedBox(
-              width: 150,
-              height: 100,
+              width: .550*MediaQuery.of(context).size.width,
+              height: .100*MediaQuery.of(context).size.height,
               child: Text(
                 'Crescoo \nWorkers',
                 style: TextStyle(
                   color: Color(0xFF4F4F4F),
-                  fontSize: 40,
+                  fontSize: .07*MediaQuery.of(context).size.width,
                   fontFamily: 'Hind Siliguri',
                   fontWeight: FontWeight.w700,
                 ),
@@ -32,7 +32,7 @@ class Top_part extends StatelessWidget {
               '- Build it up',
               style: TextStyle(
                 color: Colors.black,
-                fontSize: 25,
+                fontSize: .05*MediaQuery.of(context).size.width,
                 fontFamily: 'Poppins',
                 fontWeight: FontWeight.w400,
               ),
@@ -42,8 +42,8 @@ class Top_part extends StatelessWidget {
             left: .145*MediaQuery.of(context).size.width,
             top: .1 * MediaQuery.of(context).size.height,
             child: Container(
-              width: 140,
-              height: 140,
+              width: .245*MediaQuery.of(context).size.width,
+              height: .13 * MediaQuery.of(context).size.height,
               decoration: BoxDecoration(
                 image: DecorationImage(
                   image: AssetImage("images/CrescooLogoBlue.png"),

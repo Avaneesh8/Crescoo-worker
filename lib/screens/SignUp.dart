@@ -3,6 +3,8 @@ import 'package:crescoo/widgets/Top_part.dart';
 import 'package:flutter/material.dart';
 import 'package:country_picker/country_picker.dart';
 
+import 'Details.dart';
+
 class SignUp extends StatefulWidget {
   const SignUp({Key? key}) : super(key: key);
 
@@ -27,8 +29,29 @@ class _SignUpState extends State<SignUp> {
     displayNameNoCountryCode: "IN",
     e164Key: "",
   );
+
   @override
   Widget build(BuildContext context) {
+    phoneController.selection = TextSelection.fromPosition(
+      TextPosition(
+        offset: phoneController.text.length,
+      ),
+    );
+    name.selection = TextSelection.fromPosition(
+      TextPosition(
+        offset: name.text.length,
+      ),
+    );
+    age.selection = TextSelection.fromPosition(
+      TextPosition(
+        offset: age.text.length,
+      ),
+    );
+    gender.selection = TextSelection.fromPosition(
+      TextPosition(
+        offset: gender.text.length,
+      ),
+    );
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -38,20 +61,20 @@ class _SignUpState extends State<SignUp> {
                 height: .270 * MediaQuery.of(context).size.height,
                 child: Top_part()),
             SizedBox(
-                width: .25 * MediaQuery.of(context).size.width,
-                height: .1 * MediaQuery.of(context).size.height,
-                child: FittedBox(
-                  fit: BoxFit.scaleDown,
-                  child: Text(
-                    'SignUp',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 35,
-                      fontFamily: 'Poppins',
-                      fontWeight: FontWeight.w600,
-                    ),
+              width: .25 * MediaQuery.of(context).size.width,
+              height: .1 * MediaQuery.of(context).size.height,
+              child: FittedBox(
+                fit: BoxFit.scaleDown,
+                child: Text(
+                  'SignUp',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 35,
+                    fontFamily: 'Poppins',
+                    fontWeight: FontWeight.w600,
                   ),
                 ),
+              ),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 25, horizontal: 35),
@@ -113,19 +136,19 @@ class _SignUpState extends State<SignUp> {
                   ),
                   suffixIcon: phoneController.text.length > 9
                       ? Container(
-                    height: 30,
-                    width: 30,
-                    margin: const EdgeInsets.all(10.0),
-                    decoration: const BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.green,
-                    ),
-                    child: const Icon(
-                      Icons.done,
-                      color: Colors.white,
-                      size: 20,
-                    ),
-                  )
+                          height: 30,
+                          width: 30,
+                          margin: const EdgeInsets.all(10.0),
+                          decoration: const BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Colors.green,
+                          ),
+                          child: const Icon(
+                            Icons.done,
+                            color: Colors.white,
+                            size: 20,
+                          ),
+                        )
                       : null,
                 ),
               ),
@@ -227,19 +250,54 @@ class _SignUpState extends State<SignUp> {
                 ),
               ),
             ),
-            GestureDetector(
-              onTap: (){
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const Login()),
-                );
-              },
-              child: Container(
-                width: MediaQuery.of(context).size.width,
-                height: 50,
-                child: Center(child: Text("Already Signed up? Tap here to Login",style: TextStyle(color: Colors.black,fontSize: 20),)),
+            Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const Details()),
+                  );
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                      color: Color.fromRGBO(189, 189, 199, 1),
+                      border: Border.all(
+                        color: Color.fromRGBO(189, 189, 199, 1),
+                      ),
+                      borderRadius: BorderRadius.all(Radius.circular(25))),
+                  constraints: BoxConstraints(
+                      minWidth: 200,
+                      maxWidth: .5 * MediaQuery.of(context).size.width),
+                  height: 50,
+                  child: Center(
+                      child: Text(
+                    "Proceed",
+                    style: TextStyle(color: Colors.white, fontSize: 25),
+                  )),
+                ),
               ),
-            )
+            ),
+            Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => const Login()),
+                  );
+                },
+                child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  height: 50,
+                  child: Center(
+                      child: Text(
+                        "Already Signed up? Tap here to Login",
+                        style: TextStyle(color: Colors.black, fontSize: 20),
+                      )),
+                ),
+              ),
+            ),
           ],
         ),
       ),
