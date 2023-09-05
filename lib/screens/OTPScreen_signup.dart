@@ -1,21 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
-
-import '../widgets/Custom_Button.dart';
-import '../widgets/SnackBar.dart';
 import '../widgets/Top_part.dart';
 import 'Home.dart';
 import 'Login.dart';
 
-class OTPScreen extends StatefulWidget {
+class OTPScreen_signup extends StatefulWidget {
 
-  const OTPScreen({super.key});
+  const OTPScreen_signup({super.key});
 
   @override
-  State<OTPScreen> createState() => _OTPScreenState();
+  State<OTPScreen_signup> createState() => _OTPScreenState_signup();
 }
 
-class _OTPScreenState extends State<OTPScreen> {
+class _OTPScreenState_signup extends State<OTPScreen_signup> {
   String? otpCode;
 
   @override
@@ -124,6 +121,7 @@ class _OTPScreenState extends State<OTPScreen> {
                           child: Center(
                               child: Text(
                                 "Already Signed up? Tap here to Login",
+                                textAlign: TextAlign.center,
                                 style: TextStyle(color: Colors.black, fontSize: 20),
                               )),
                         ),

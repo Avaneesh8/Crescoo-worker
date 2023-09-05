@@ -1,9 +1,8 @@
 import 'package:crescoo/screens/Login.dart';
-import 'package:crescoo/screens/OTPScreen.dart';
 import 'package:crescoo/widgets/Top_part.dart';
 import 'package:flutter/material.dart';
 
-import 'SignUp.dart';
+import 'OTPScreen_signup.dart';
 
 class Details extends StatefulWidget {
   const Details({Key? key}) : super(key: key);
@@ -144,87 +143,84 @@ class _DetailsState extends State<Details> {
                 ),
               )
             ),
-            Padding(
-              padding: const EdgeInsets.only(left: 65,right: 65),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 25, horizontal: 35),
-                    child: Container(
-                      width: MediaQuery.of(context).size.width*.2,
-                      child: TextFormField(
-                        cursorColor: Colors.black,
-                        controller: per_hour,
-                        keyboardType: TextInputType.number,
-                        textAlign: TextAlign.center,
-                        style: const TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 25, horizontal: 35),
+                  child: Container(
+                    width: MediaQuery.of(context).size.width*.3,
+                    child: TextFormField(
+                      cursorColor: Colors.black,
+                      controller: per_hour,
+                      keyboardType: TextInputType.number,
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      onChanged: (value) {
+                        setState(() {
+                          per_hour.text = value;
+                        });
+                      },
+                      decoration: InputDecoration(
+                        hintText: "Per Hour",
+                        hintStyle: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 15,
+                          color: Colors.grey.shade600,
                         ),
-                        onChanged: (value) {
-                          setState(() {
-                            per_hour.text = value;
-                          });
-                        },
-                        decoration: InputDecoration(
-                          hintText: "Per Hour",
-                          hintStyle: TextStyle(
-                            fontWeight: FontWeight.w500,
-                            fontSize: 15,
-                            color: Colors.grey.shade600,
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                            borderSide: const BorderSide(color: Colors.black12),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                            borderSide: const BorderSide(color: Colors.black12),
-                          ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: const BorderSide(color: Colors.black12),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: const BorderSide(color: Colors.black12),
                         ),
                       ),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 25, horizontal: 35),
-                    child: Container(
-                      width: MediaQuery.of(context).size.width*.2,
-                      child: TextFormField(
-                        cursorColor: Colors.black,
-                        controller: per_day,
-                        textAlign: TextAlign.center,
-                        keyboardType: TextInputType.number,
-                        style: const TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 25, horizontal: 35),
+                  child: Container(
+                    width: MediaQuery.of(context).size.width*.3,
+                    child: TextFormField(
+                      cursorColor: Colors.black,
+                      controller: per_day,
+                      textAlign: TextAlign.center,
+                      keyboardType: TextInputType.number,
+                      style: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      onChanged: (value) {
+                        setState(() {
+                          per_day.text = value;
+                        });
+                      },
+                      decoration: InputDecoration(
+                        hintText: "Per Day",
+                        hintStyle: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 15,
+                          color: Colors.grey.shade600,
                         ),
-                        onChanged: (value) {
-                          setState(() {
-                            per_day.text = value;
-                          });
-                        },
-                        decoration: InputDecoration(
-                          hintText: "Per Day",
-                          hintStyle: TextStyle(
-                            fontWeight: FontWeight.w500,
-                            fontSize: 15,
-                            color: Colors.grey.shade600,
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                            borderSide: const BorderSide(color: Colors.black12),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                            borderSide: const BorderSide(color: Colors.black12),
-                          ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: const BorderSide(color: Colors.black12),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: const BorderSide(color: Colors.black12),
                         ),
                       ),
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
             Padding(
               padding: const EdgeInsets.all(15.0),
@@ -232,7 +228,7 @@ class _DetailsState extends State<Details> {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const OTPScreen()),
+                    MaterialPageRoute(builder: (context) => const OTPScreen_signup()),
                   );
                 },
                 child: Container(

@@ -26,7 +26,7 @@ class Top_part extends StatelessWidget {
             ),
           ),
           Positioned(
-            left: .620*MediaQuery.of(context).size.width,
+            left: .580*MediaQuery.of(context).size.width,
             top: .225 * MediaQuery.of(context).size.height,
             child: Text(
               '- Build it up',
@@ -39,7 +39,7 @@ class Top_part extends StatelessWidget {
             ),
           ),
           Positioned(
-            left: .145*MediaQuery.of(context).size.width,
+            left: .130*MediaQuery.of(context).size.width,
             top: .1 * MediaQuery.of(context).size.height,
             child: Container(
               width: .245*MediaQuery.of(context).size.width,

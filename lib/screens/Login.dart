@@ -1,4 +1,6 @@
 import 'package:country_picker/country_picker.dart';
+import 'package:crescoo/screens/OTPScreen_login.dart';
+import 'package:crescoo/screens/OTPScreen_signup.dart';
 import 'package:crescoo/screens/SignUp.dart';
 import 'package:flutter/material.dart';
 
@@ -147,7 +149,7 @@ class _LoginState extends State<Login> {
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => const SignUp()),
+                        MaterialPageRoute(builder: (context) => const OTPScreenLogin()),
                       );
                     },
                     child: Container(
