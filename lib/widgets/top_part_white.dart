@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class Top_part extends StatelessWidget {
-  const Top_part({Key? key}) : super(key: key);
+class Top_part_white extends StatelessWidget {
+  const Top_part_white({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        //color: Colors.white,
+        color: Colors.white,
         child: Stack(
           children: [
             Positioned(
