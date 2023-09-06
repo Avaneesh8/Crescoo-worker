@@ -7,20 +7,20 @@ class Top_part extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        //color: Colors.white,
+        color: Colors.white,
         child: Stack(
           children: [
             Positioned(
               left: .415*MediaQuery.of(context).size.width,
-              top: .125 * MediaQuery.of(context).size.height,
+              top: .075 * MediaQuery.of(context).size.height,
               child: SizedBox(
                 width: .550*MediaQuery.of(context).size.width,
-                height: .100*MediaQuery.of(context).size.height,
+                height: .050*MediaQuery.of(context).size.height,
                 child: Text(
                   'Crescoo \nWorkers',
                   style: TextStyle(
                     color: Color(0xFF4F4F4F),
-                    fontSize: .07*MediaQuery.of(context).size.width,
+                    fontSize: 25,
                     fontFamily: 'Hind Siliguri',
                     fontWeight: FontWeight.w700,
                   ),
@@ -29,7 +29,7 @@ class Top_part extends StatelessWidget {
             ),
             Positioned(
               left: .580*MediaQuery.of(context).size.width,
-              top: .225 * MediaQuery.of(context).size.height,
+              top: .175 * MediaQuery.of(context).size.height,
               child: Text(
                 '- Build it up',
                 style: TextStyle(
@@ -42,7 +42,7 @@ class Top_part extends StatelessWidget {
             ),
             Positioned(
               left: .130*MediaQuery.of(context).size.width,
-              top: .1 * MediaQuery.of(context).size.height,
+              top: .05 * MediaQuery.of(context).size.height,
               child: Container(
                 width: .245*MediaQuery.of(context).size.width,
                 height: .13 * MediaQuery.of(context).size.height,

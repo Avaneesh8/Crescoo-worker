@@ -38,15 +38,15 @@ class _DetailsState extends State<Details> {
         offset: per_day.text.length,
       ),
     );
-    return Container(
-      color: Colors.white,
-      child: Scaffold(
-        body: SingleChildScrollView(
-          child: Column(
+    return Scaffold(
+      body: Container(
+        color: Colors.white,
+        child: ListView(
+          children: [Column(
             children: [
               SizedBox(
                   width: MediaQuery.of(context).size.width,
-                  height: .270 * MediaQuery.of(context).size.height,
+                  height: .200 * MediaQuery.of(context).size.height,
                   child: const Top_part()),
               SizedBox(
                 width: .25 * MediaQuery.of(context).size.width,
@@ -273,7 +273,7 @@ class _DetailsState extends State<Details> {
               ),
             ],
           ),
-        ),
+        ]),
       ),
     );
   }

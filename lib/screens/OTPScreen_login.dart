@@ -20,19 +20,18 @@ class _OTPScreenStateLogin extends State<OTPScreenLogin> {
 
 
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Container(
-          height: MediaQuery.of(context).size.height,
-          //color: Colors.white,
-          child: Center(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(
-                  vertical: 25, horizontal: 30),
+      body: Container(
+        color: Colors.white,
+        child: ListView(
+          children:[ Container(
+            height: MediaQuery.of(context).size.height,
+            //color: Colors.white,
+            child: Center(
               child: Column(
                 children: [
                   SizedBox(
                       width: MediaQuery.of(context).size.width,
-                      height: .270 * MediaQuery.of(context).size.height,
+                      height: .200 * MediaQuery.of(context).size.height,
                       child: const Top_part()),
                   SizedBox(height: MediaQuery.of(context).size.height*.13),
                   const Padding(
@@ -130,7 +129,7 @@ class _OTPScreenStateLogin extends State<OTPScreenLogin> {
               ),
             ),
           ),
-        ),
+        ]),
       ),
     );
   }
