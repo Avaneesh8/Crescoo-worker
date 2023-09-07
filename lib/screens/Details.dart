@@ -1,7 +1,9 @@
+import 'package:crescoo/screens/OTPScreen.dart';
 import 'package:crescoo/screens/authentication/Login.dart';
 import 'package:crescoo/widgets/Top_part.dart';
 import 'package:flutter/material.dart';
-import 'OTPScreen_signup.dart';
+
+import 'Home.dart';
 
 class Details extends StatefulWidget {
   const Details({Key? key}) : super(key: key);
@@ -229,7 +231,7 @@ class _DetailsState extends State<Details> {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => const OTPScreen_signup()),
+                      MaterialPageRoute(builder: (context) => const Home()),
                     );
                   },
                   child: Container(

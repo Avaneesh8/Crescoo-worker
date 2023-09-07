@@ -20,7 +20,7 @@ class Top_part extends StatelessWidget {
                   'Crescoo \nWorkers',
                   style: TextStyle(
                     color: Color(0xFF4F4F4F),
-                    fontSize: 25,
+                    fontSize: 20,
                     fontFamily: 'Hind Siliguri',
                     fontWeight: FontWeight.w700,
                   ),

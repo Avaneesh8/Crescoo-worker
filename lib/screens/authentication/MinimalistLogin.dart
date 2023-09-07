@@ -26,7 +26,24 @@ class MinimalistLogin extends StatelessWidget {
                   fontSize: 35,
                 ),
               ),
-              SizedBox(height: 100,width: 150,),
+              SizedBox(height: MediaQuery.of(context).size.height*.1),
+              const Text(
+                "Let's get started",
+                style: TextStyle(
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(height: 10),
+              const Text(
+                "Never a better time than now to start.",
+                style: TextStyle(
+                  fontSize: 14,
+                  color: Colors.black38,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              SizedBox(height: MediaQuery.of(context).size.height*.03),
               GestureDetector(
                 onTap: (){
                   Navigator.push(
@@ -44,30 +61,10 @@ class MinimalistLogin extends StatelessWidget {
                   ),
                   width: 250,
                   height: 50,
-                  child: Center(child: Text("Login",style: TextStyle(color: Colors.white,fontSize: 30),)),
+                  child: Center(child: Text("Get Started",style: TextStyle(color: Colors.white,fontSize: 30),)),
                 ),
               ),
-              SizedBox(height: 30,width: 150,),
-              GestureDetector(
-                onTap: (){
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const SignUp()),
-                  );
-                },
-                child: Container(
-                  decoration: BoxDecoration(
-                      color: Color.fromRGBO(189, 189, 199, 1),
-                      border: Border.all(
-                        color: Color.fromRGBO(189, 189, 199, 1),
-                      ),
-                      borderRadius: BorderRadius.all(Radius.circular(25))
-                  ),
-                  width: 250,
-                  height: 50,
-                  child: Center(child: Text("SignUp",style: TextStyle(color: Colors.white,fontSize: 30),)),
-                ),
-              )
+
             ],
           ),
         ),

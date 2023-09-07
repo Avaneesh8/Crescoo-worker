@@ -1,9 +1,7 @@
 import 'package:country_picker/country_picker.dart';
-import 'package:crescoo/screens/OTPScreen_login.dart';
-import 'package:crescoo/screens/OTPScreen_signup.dart';
-import 'package:crescoo/screens/SignUp.dart';
 import 'package:flutter/material.dart';
-
+import 'package:provider/provider.dart';
+import '../../provider/auth_provider.dart';
 import '../../widgets/Top_part.dart';
 
 class Login extends StatefulWidget {
@@ -149,13 +147,8 @@ class _LoginState extends State<Login> {
                     ),
                     Padding(
                       padding: const EdgeInsets.all(15.0),
-                      child: GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => const OTPScreenLogin()),
-                          );
-                        },
+                      child: InkWell(
+                        onTap: ()=>sendPhoneNumber(),
                         child: Container(
                           decoration: BoxDecoration(
                               color: Color.fromRGBO(189, 189, 199, 1),
@@ -175,30 +168,7 @@ class _LoginState extends State<Login> {
                         ),
                       ),
                     ),
-                    SizedBox(
-                      //Use of SizedBox
-                      height: .15 * MediaQuery.of(context).size.height,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(15.0),
-                      child: GestureDetector(
-                        onTap: () {
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(builder: (context) => const SignUp()),
-                          );
-                        },
-                        child: Container(
-                          width: MediaQuery.of(context).size.width,
-                          height: 50,
-                          child: Center(
-                              child: Text(
-                            "Not signed up? Tap here to sign up.",
-                            style: TextStyle(color: Colors.black, fontSize: 20),
-                          )),
-                        ),
-                      ),
-                    ),
+
                   ],
                 ),
               ],
@@ -207,5 +177,10 @@ class _LoginState extends State<Login> {
         ]),
       ),
     );
+  }
+  void sendPhoneNumber() {
+    final ap = Provider.of<AuthProvider>(context, listen: false);
+    String phoneNumber = phoneController.text.trim();
+    ap.signInWithPhone(context, "+${selectedCountry.phoneCode}$phoneNumber");
   }
 }

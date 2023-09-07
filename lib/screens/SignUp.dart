@@ -280,26 +280,6 @@ class _SignUpState extends State<SignUp> {
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(15.0),
-                child: GestureDetector(
-                  onTap: () {
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(builder: (context) => const Login()),
-                    );
-                  },
-                  child: Container(
-                    width: MediaQuery.of(context).size.width,
-                    height: 50,
-                    child: Center(
-                        child: Text(
-                          "Already Signed up? Tap here to Login",
-                          style: TextStyle(color: Colors.black, fontSize: 20),
-                        )),
-                  ),
-                ),
-              ),
             ],
           ),
         ]),

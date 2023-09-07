@@ -1,26 +1,41 @@
+import 'package:crescoo/screens/Details.dart';
+import 'package:crescoo/screens/Home.dart';
 import 'package:crescoo/screens/SignUp.dart';
 import 'package:crescoo/widgets/NavBar.dart';
 import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
+import 'package:provider/provider.dart';
+import '../provider/auth_provider.dart';
+import '../widgets/SnackBar.dart';
 import '../widgets/Top_part.dart';
 
-class OTPScreenLogin extends StatefulWidget {
+class OTPScreen extends StatefulWidget {
 
-  const OTPScreenLogin({super.key});
+  final String verificationId;
+  final String number;
+  const OTPScreen({super.key, required this.verificationId,required this.number});
 
   @override
-  State<OTPScreenLogin> createState() => _OTPScreenStateLogin();
+  State<OTPScreen> createState() => _OTPScreenState();
 }
 
-class _OTPScreenStateLogin extends State<OTPScreenLogin> {
+class _OTPScreenState extends State<OTPScreen> {
   String? otpCode;
 
   @override
   Widget build(BuildContext context) {
-
+    final isLoading =
+        Provider.of<AuthProvider>(context, listen: true).isLoading;
 
     return Scaffold(
-      body: Container(
+      body: SafeArea(
+        child: isLoading == true
+        ? const Center(
+        child: CircularProgressIndicator(
+        color: Color(0xFFA18030),
+    ),
+    )
+        : Container(
         color: Colors.white,
         child: ListView(
           children:[ Container(
@@ -80,10 +95,11 @@ class _OTPScreenStateLogin extends State<OTPScreenLogin> {
                     padding: const EdgeInsets.all(15.0),
                     child: GestureDetector(
                       onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => const NavBar()),
-                        );
+                        if (otpCode != null) {
+                          verifyOtp(context, otpCode!);
+                        } else {
+                          showSnackBar(context, "Enter 6-Digit code");
+                        }
                       },
                       child: Container(
                         decoration: BoxDecoration(
@@ -104,34 +120,53 @@ class _OTPScreenStateLogin extends State<OTPScreenLogin> {
                       ),
                     ),
                   ),
-                  SizedBox(height: MediaQuery.of(context).size.height*.1),
-                  Padding(
-                    padding: const EdgeInsets.all(15.0),
-                    child: GestureDetector(
-                      onTap: () {
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(builder: (context) => const SignUp()),
-                        );
-                      },
-                      child: Container(
-                        width: MediaQuery.of(context).size.width,
-                        height: 50,
-                        child: Center(
-                            child: Text(
-                              "Not signed up? Tap here to sign up.",
-                              style: TextStyle(color: Colors.black, fontSize: 20),
-                            )),
-                      ),
-                    ),
-                  )
                 ],
               ),
             ),
           ),
         ]),
       ),
+    ));
+  }
+  void verifyOtp(BuildContext context, String userOtp) {
+    final ap = Provider.of<AuthProvider>(context, listen: false);
+    ap.verifyOtp(
+      context: context,
+      verificationId: widget.verificationId,
+      userOtp: userOtp,
+      onSuccess: () {
+        // checking whether user exists in the db
+        ap.checkExistingUser().then(
+              (value) async {
+            if (value == true) {
+              // user exists in our app
+              ap.getDataFromFirestore().then(
+                    (value) => ap.saveUserDataToSP().then(
+                      (value) => ap.setSignIn().then(
+                        (value) => Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const Details(),
+                        ),
+                            (route) => false),
+                  ),
+                ),
+              );
+            } else {
+              // new user
+              Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(builder: (context) => const SignUp()),
+                      (route) => false);
+            }
+          },
+        );
+      },
     );
+  }
+  void sendPhoneNumber() {
+    final ap = Provider.of<AuthProvider>(context, listen: false);
+    ap.signInWithPhone(context, widget.number);
   }
 }
 

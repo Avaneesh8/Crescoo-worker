@@ -1,8 +1,16 @@
+import 'package:crescoo/provider/auth_provider.dart';
 import 'package:crescoo/screens/SplashScreen.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-void main() {
-  runApp(const MyApp());
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(ChangeNotifierProvider(
+    create: (context) => AuthProvider(), // Initialize your AuthProvider
+    child: const MyApp(),
+  ),);
 }
 
 class MyApp extends StatelessWidget {
