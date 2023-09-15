@@ -1,4 +1,5 @@
 import 'package:crescoo/screens/SignUp.dart';
+import 'package:crescoo/widgets/NavBar.dart';
 import 'package:flutter/material.dart';
 
 import 'Login.dart';
@@ -64,7 +65,6 @@ class MinimalistLogin extends StatelessWidget {
                   child: Center(child: Text("Get Started",style: TextStyle(color: Colors.white,fontSize: 30),)),
                 ),
               ),
-
             ],
           ),
         ),

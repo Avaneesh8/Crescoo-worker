@@ -1,5 +1,6 @@
 import 'package:crescoo/provider/auth_provider.dart';
 import 'package:crescoo/screens/SplashScreen.dart';
+import 'package:crescoo/screens/profile.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -23,6 +24,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        fontFamily: "poppins",
       ),
       home: SplashScreen(),
     );

@@ -29,7 +29,7 @@ class Top_part extends StatelessWidget {
             ),
             Positioned(
               left: .580*MediaQuery.of(context).size.width,
-              top: .175 * MediaQuery.of(context).size.height,
+              top: .155 * MediaQuery.of(context).size.height,
               child: Text(
                 '- Build it up',
                 style: TextStyle(

@@ -1,12 +1,21 @@
 import 'package:crescoo/screens/OTPScreen.dart';
 import 'package:crescoo/screens/authentication/Login.dart';
+import 'package:crescoo/widgets/NavBar.dart';
 import 'package:crescoo/widgets/Top_part.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../model/user_model.dart';
+import '../provider/auth_provider.dart';
 import 'Home.dart';
 
 class Details extends StatefulWidget {
-  const Details({Key? key}) : super(key: key);
+  final String name;
+  final String age;
+  final String gender;
+  const Details(
+      {Key? key, required this.name, required this.age, required this.gender})
+      : super(key: key);
 
   @override
   State<Details> createState() => _DetailsState();
@@ -43,8 +52,8 @@ class _DetailsState extends State<Details> {
     return Scaffold(
       body: Container(
         color: Colors.white,
-        child: ListView(
-          children: [Column(
+        child: ListView(children: [
+          Column(
             children: [
               SizedBox(
                   width: MediaQuery.of(context).size.width,
@@ -67,7 +76,8 @@ class _DetailsState extends State<Details> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(vertical: 25, horizontal: 35),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 25, horizontal: 35),
                 child: TextFormField(
                   cursorColor: Colors.black,
                   controller: Occupation,
@@ -99,7 +109,8 @@ class _DetailsState extends State<Details> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(vertical: 25, horizontal: 35),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 25, horizontal: 35),
                 child: TextFormField(
                   cursorColor: Colors.black,
                   controller: Years_of_experience,
@@ -132,27 +143,25 @@ class _DetailsState extends State<Details> {
                 ),
               ),
               const Padding(
-                padding: EdgeInsets.symmetric(vertical: 15, horizontal: 45),
-                child: Align(
-                  alignment: Alignment.topLeft,
-                  child: Text(
-                    'Your Pay Info:',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 15,
-                      fontFamily: 'Poppins',
-                      fontWeight: FontWeight.w400,
-                    )
-                  ),
-                )
-              ),
+                  padding: EdgeInsets.symmetric(vertical: 15, horizontal: 45),
+                  child: Align(
+                    alignment: Alignment.topLeft,
+                    child: Text('Your Pay Info:',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 15,
+                          fontFamily: 'Poppins',
+                          fontWeight: FontWeight.w400,
+                        )),
+                  )),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 25, horizontal: 35),
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 25, horizontal: 35),
                     child: Container(
-                      width: MediaQuery.of(context).size.width*.3,
+                      width: MediaQuery.of(context).size.width * .3,
                       child: TextFormField(
                         cursorColor: Colors.black,
                         controller: per_hour,
@@ -187,9 +196,10 @@ class _DetailsState extends State<Details> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 25, horizontal: 35),
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 25, horizontal: 35),
                     child: Container(
-                      width: MediaQuery.of(context).size.width*.3,
+                      width: MediaQuery.of(context).size.width * .3,
                       child: TextFormField(
                         cursorColor: Colors.black,
                         controller: per_day,
@@ -228,47 +238,23 @@ class _DetailsState extends State<Details> {
               Padding(
                 padding: const EdgeInsets.all(15.0),
                 child: GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const Home()),
-                    );
-                  },
+                  onTap: ()=>storeData(),
                   child: Container(
                     decoration: BoxDecoration(
                         color: const Color.fromRGBO(189, 189, 199, 1),
                         border: Border.all(
                           color: const Color.fromRGBO(189, 189, 199, 1),
                         ),
-                        borderRadius: const BorderRadius.all(Radius.circular(25))),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(25))),
                     constraints: BoxConstraints(
                         minWidth: 200,
                         maxWidth: .5 * MediaQuery.of(context).size.width),
                     height: 50,
                     child: const Center(
                         child: Text(
-                      "Send OTP",
+                      "Proceed",
                       style: TextStyle(color: Colors.white, fontSize: 25),
-                    )),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(15.0),
-                child: GestureDetector(
-                  onTap: () {
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(builder: (context) => const Login()),
-                    );
-                  },
-                  child: Container(
-                    width: MediaQuery.of(context).size.width,
-                    height: 50,
-                    child: const Center(
-                        child: Text(
-                      "Already Signed up? Tap here to Login",
-                      style: TextStyle(color: Colors.black, fontSize: 20),
                     )),
                   ),
                 ),
@@ -277,6 +263,38 @@ class _DetailsState extends State<Details> {
           ),
         ]),
       ),
+    );
+  }
+
+  void storeData() async {
+    final ap = Provider.of<AuthProvider>(context, listen: false);
+    UserModel userModel = UserModel(
+      name: widget.name.trim(),
+      createdAt: "",
+      phoneNumber: "",
+      uid: "",
+      gender: widget.gender.trim(),
+      age: widget.age.trim(),
+      occupation: Occupation.text.trim(),
+      years_of_experience: Years_of_experience.text.trim(),
+      per_hour: per_hour.text.trim(),
+      per_day: per_day.text.trim(),
+    );
+    ap.saveUserDataToFirebase(
+      context: context,
+      userModel: userModel,
+      onSuccess: () {
+        ap.saveUserDataToSP().then(
+              (value) => ap.setSignIn().then(
+                    (value) => Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const NavBar(),
+                        ),
+                        (route) => false),
+                  ),
+            );
+      },
     );
   }
 }
