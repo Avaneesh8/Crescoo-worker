@@ -1,6 +1,6 @@
 # crescoo
 
-application for finding job
+application for finding job for workers
 
 ## Getting Started
 
