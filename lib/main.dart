@@ -1,4 +1,5 @@
 import 'package:crescoo/provider/auth_provider.dart';
+import 'package:crescoo/screens/Details.dart';
 import 'package:crescoo/screens/SplashScreen.dart';
 import 'package:crescoo/screens/profile.dart';
 import 'package:firebase_core/firebase_core.dart';

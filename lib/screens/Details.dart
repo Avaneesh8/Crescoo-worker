@@ -4,6 +4,7 @@ import 'package:crescoo/widgets/NavBar.dart';
 import 'package:crescoo/widgets/Top_part.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 import '../model/user_model.dart';
 import '../provider/auth_provider.dart';
@@ -22,18 +23,31 @@ class Details extends StatefulWidget {
 }
 
 class _DetailsState extends State<Details> {
-  final TextEditingController Occupation = TextEditingController();
   final TextEditingController Years_of_experience = TextEditingController();
   final TextEditingController per_hour = TextEditingController();
   final TextEditingController per_day = TextEditingController();
+  final List<String> cities = [
+    'Mumbai',
+    'Delhi',
+    'Bangalore',
+    'Hyderabad',
+    'Chennai',
+    'Kolkata',
+    'Pune',
+  ]; // Add your list of cities here
+  String selectedCity = "Mumbai";
+  final List<String> occupation = [
+    'Carpentry',
+    'Cleaning',
+    'Blacksmith',
+    'Electrical',
+    'Plumbing',
+    'Movers',
+  ]; // Add your list of cities here
+  String occupationselection = "Carpentry";// Default city selection
 
   @override
   Widget build(BuildContext context) {
-    Occupation.selection = TextSelection.fromPosition(
-      TextPosition(
-        offset: Occupation.text.length,
-      ),
-    );
     Years_of_experience.selection = TextSelection.fromPosition(
       TextPosition(
         offset: Years_of_experience.text.length,
@@ -76,23 +90,23 @@ class _DetailsState extends State<Details> {
                 ),
               ),
               Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 25, horizontal: 35),
-                child: TextFormField(
-                  cursorColor: Colors.black,
-                  controller: Occupation,
-                  style: const TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                  ),
-                  onChanged: (value) {
+                padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 35),
+                child: DropdownButtonFormField(
+                  value: occupationselection,
+                  onChanged: (newValue) {
                     setState(() {
-                      Occupation.text = value;
+                      occupationselection = newValue.toString();
                     });
                   },
+                  items: occupation.map((city) {
+                    return DropdownMenuItem(
+                      value: city,
+                      child: Text(city),
+                    );
+                  }).toList(),
                   decoration: InputDecoration(
-                    hintText: "Occupation",
-                    hintStyle: TextStyle(
+                    labelText: 'Occuption',
+                    labelStyle: TextStyle(
                       fontWeight: FontWeight.w500,
                       fontSize: 15,
                       color: Colors.grey.shade600,
@@ -127,6 +141,39 @@ class _DetailsState extends State<Details> {
                   decoration: InputDecoration(
                     hintText: "Years Of Experience",
                     hintStyle: TextStyle(
+                      fontWeight: FontWeight.w500,
+                      fontSize: 15,
+                      color: Colors.grey.shade600,
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: const BorderSide(color: Colors.black12),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: const BorderSide(color: Colors.black12),
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 35),
+                child: DropdownButtonFormField(
+                  value: selectedCity,
+                  onChanged: (newValue) {
+                    setState(() {
+                      selectedCity = newValue.toString();
+                    });
+                  },
+                  items: cities.map((city) {
+                    return DropdownMenuItem(
+                      value: city,
+                      child: Text(city),
+                    );
+                  }).toList(),
+                  decoration: InputDecoration(
+                    labelText: 'City',
+                    labelStyle: TextStyle(
                       fontWeight: FontWeight.w500,
                       fontSize: 15,
                       color: Colors.grey.shade600,
@@ -273,9 +320,15 @@ class _DetailsState extends State<Details> {
       createdAt: "",
       phoneNumber: "",
       uid: "",
+      status: "not working",
+      work_address: "",
+      work_owner_name: "",
+      work_phonenumber: "",
+      booked:"",
+      city: selectedCity,
       gender: widget.gender.trim(),
       age: widget.age.trim(),
-      occupation: Occupation.text.trim(),
+      occupation: occupationselection,
       years_of_experience: Years_of_experience.text.trim(),
       per_hour: per_hour.text.trim(),
       per_day: per_day.text.trim(),
@@ -289,7 +342,7 @@ class _DetailsState extends State<Details> {
                     (value) => Navigator.pushAndRemoveUntil(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const NavBar(),
+                          builder: (context) => NavBar(),
                         ),
                         (route) => false),
                   ),

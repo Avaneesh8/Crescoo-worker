@@ -97,7 +97,7 @@ class AuthProvider extends ChangeNotifier {
   // DATABASE OPERTAIONS
   Future<bool> checkExistingUser() async {
     DocumentSnapshot snapshot =
-    await _firebaseFirestore.collection("users").doc(_uid).get();
+    await _firebaseFirestore.collection("workers").doc(_uid).get();
     if (snapshot.exists) {
       return true;
     } else {
@@ -118,7 +118,7 @@ class AuthProvider extends ChangeNotifier {
     try {
       _userModel = userModel;
       await _firebaseFirestore
-          .collection("users")
+          .collection("workers")
           .doc(_uid)
           .set(userModel.toMap())
           .then((value) {
@@ -135,14 +135,14 @@ class AuthProvider extends ChangeNotifier {
 
   Future getDataFromFirestore() async {
     await _firebaseFirestore
-        .collection("users")
+        .collection("workers")
         .doc(_firebaseAuth.currentUser!.uid)
         .get()
         .then((DocumentSnapshot snapshot) {
       _userModel = UserModel(
         name: snapshot['name'],
         gender: snapshot['gender'],
-        createdAt: snapshot['createdAt'],
+        createdAt: snapshot['created At'],
         age: snapshot['age'],
         uid: snapshot['uid'],
         per_hour: snapshot['per hour'],
@@ -150,6 +150,12 @@ class AuthProvider extends ChangeNotifier {
         per_day: snapshot['per day'],
         occupation: snapshot['occupation'],
         years_of_experience: snapshot['years of experience'],
+        city: snapshot['city'],
+        status: snapshot['status'],
+        work_address: snapshot['work_address'],
+        work_owner_name: snapshot['work_owner_name'],
+        work_phonenumber: snapshot['work_phonenumber'],
+        booked: snapshot['booked'],
       );
       _uid = userModel.uid;
     });

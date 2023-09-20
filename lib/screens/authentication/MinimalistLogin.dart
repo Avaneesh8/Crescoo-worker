@@ -1,7 +1,9 @@
 import 'package:crescoo/screens/SignUp.dart';
 import 'package:crescoo/widgets/NavBar.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../../provider/auth_provider.dart';
 import 'Login.dart';
 
 class MinimalistLogin extends StatelessWidget {
@@ -9,6 +11,7 @@ class MinimalistLogin extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ap = Provider.of<AuthProvider>(context, listen: false);
     return Scaffold(
       body: Center(
         child: Container(
@@ -19,7 +22,8 @@ class MinimalistLogin extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image(width: 150, image: AssetImage('images/CrescooLogoBlue.png')),
+              Image(
+                  width: 150, image: AssetImage('images/CrescooLogoBlue.png')),
               Text(
                 "Crescoo\nWorkers",
                 style: TextStyle(
@@ -27,7 +31,7 @@ class MinimalistLogin extends StatelessWidget {
                   fontSize: 35,
                 ),
               ),
-              SizedBox(height: MediaQuery.of(context).size.height*.1),
+              SizedBox(height: MediaQuery.of(context).size.height * .1),
               const Text(
                 "Let's get started",
                 style: TextStyle(
@@ -44,13 +48,26 @@ class MinimalistLogin extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              SizedBox(height: MediaQuery.of(context).size.height*.03),
+              SizedBox(height: MediaQuery.of(context).size.height * .03),
               GestureDetector(
-                onTap: (){
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const Login()),
-                  );
+                onTap: () async {
+                  if (ap.isSignedIn == true) {
+                    await ap.getDataFromSP().whenComplete(
+                          () => Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => NavBar(),
+                            ),
+                          ),
+                        );
+                  } else {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const Login(),
+                      ),
+                    );
+                  }
                 },
                 child: Container(
                   decoration: BoxDecoration(
@@ -58,11 +75,14 @@ class MinimalistLogin extends StatelessWidget {
                       border: Border.all(
                         color: Color.fromRGBO(26, 50, 81, 1),
                       ),
-                      borderRadius: BorderRadius.all(Radius.circular(25))
-                  ),
+                      borderRadius: BorderRadius.all(Radius.circular(25))),
                   width: 250,
                   height: 50,
-                  child: Center(child: Text("Get Started",style: TextStyle(color: Colors.white,fontSize: 30),)),
+                  child: Center(
+                      child: Text(
+                    "Get Started",
+                    style: TextStyle(color: Colors.white, fontSize: 30),
+                  )),
                 ),
               ),
             ],

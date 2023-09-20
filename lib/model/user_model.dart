@@ -11,6 +11,12 @@ class UserModel {
   String per_hour;
   String per_day;
   String createdAt;
+  String city;
+  String status;
+  String work_owner_name;
+  String work_address;
+  String work_phonenumber;
+  String booked;
 
   UserModel({
     required this.name,
@@ -23,6 +29,12 @@ class UserModel {
     required this.per_hour,
     required this.per_day,
     required this.createdAt,
+    required this.city,
+    required this.status,
+    required this.work_address,
+    required this.work_owner_name,
+    required this.work_phonenumber,
+    required this.booked,
   });
 
   // from map
@@ -34,10 +46,16 @@ class UserModel {
       uid: map['uid'] ?? '',
       phoneNumber: map['phone Number'] ?? '',
       years_of_experience: map['years of experience'] ?? '',
-      occupation: map['occupation']??'',
-      per_hour: map['per hour']??'',
-      per_day: map['per day']??'',
-      createdAt :map['createdAt']??'',
+      occupation: map['occupation'] ?? '',
+      per_hour: map['per hour'] ?? '',
+      per_day: map['per day'] ?? '',
+      createdAt: map['createdAt'] ?? '',
+      city: map['city'] ?? '',
+      status: map['status'] ?? '',
+      work_address: map['work_address'] ?? '',
+      work_owner_name: map['work_owner_name'] ?? '',
+      work_phonenumber: map['work_phonenumber'] ?? '',
+      booked: map['booked'] ?? '',
     );
   }
 
@@ -51,9 +69,15 @@ class UserModel {
       "years of experience": years_of_experience,
       "occupation": occupation,
       "phoneNumber": phoneNumber,
-      "per hour":per_hour,
-      "per day":per_day,
-      "created At":createdAt
+      "per hour": per_hour,
+      "per day": per_day,
+      "created At": createdAt,
+      "city": city,
+      "status": status,
+      "work_address": work_address,
+      "work_owner_name": work_owner_name,
+      "work_phonenumber": work_phonenumber,
+      "booked":booked,
     };
   }
 }
