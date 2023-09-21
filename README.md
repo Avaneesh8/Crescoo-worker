@@ -34,10 +34,6 @@
 
 - **Feedback System:** Both workers and employers can leave reviews and ratings, building a reputation system that benefits both parties.
 
-### 6. Messaging System
-
-- **In-App Messaging:** Communicate with employers or job seekers through the app, making it easier to discuss job opportunities and interviews.
-
 ## Technologies Used
 
 - **Frontend:** Dart, Flutter
