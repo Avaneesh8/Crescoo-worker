@@ -51,7 +51,7 @@
 1. Clone the repository from GitHub.
 
 ```
-git clone https://github.com/yourusername/crescoo-worker.git
+git clone https://github.com/Avaneesh8/Crescoo-worker.git
 ```
 
 2. Navigate to the project directory.
